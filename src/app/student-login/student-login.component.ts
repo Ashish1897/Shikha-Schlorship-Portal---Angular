@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../login.service';
+import { FormsModule, FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 
 @Component({
@@ -19,6 +20,11 @@ export class StudentLoginComponent implements OnInit {
 
   constructor(private router:Router, private loginService:LoginService) { }
 
+  loginForm = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required])
+  })
+
   ngOnInit(): void {
   }
 
@@ -29,7 +35,7 @@ export class StudentLoginComponent implements OnInit {
     }
     this.loginService.login(student).subscribe((response) => {
       console.log(response);
-      if(response)
+      if(response =="true")
       {
         sessionStorage.setItem('email', this.email)
         this.invalidLogin = false;
@@ -39,9 +45,12 @@ export class StudentLoginComponent implements OnInit {
       }
       else{
         this.invalidLogin = true;
+        this.errorMessage = 'Invalid Credentials';
+        this.loginSuccess = false;
       }
     });
     this.loginSuccess = false;
+   
   }
 
   list(){

@@ -3,11 +3,12 @@
     background-color: #ffbc3b;
     padding: 60px;
     margin-top: 20px;
-    margin-bottom: 20px;  
+    margin-bottom: 20px;
+    color: #ffbc3b;  
 }
 
 h2{
-    color: white;
+    color: #ffbc3b;
 }
 
 .container{
